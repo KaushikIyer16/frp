@@ -21,10 +21,12 @@ export class Form extends React.Component {
     return(
       <div className="container">
         <div className="row">
-          <h2>{this.props.heading}</h2>
-          <div className="col l6 m12 s12 offset-l3">
+          <h3>{this.props.heading}</h3>
+          <div className="col l12 m12 s12">
             <form action={this.props.action}>
               {form}
+              <button className="wbb-button btn waves-effect waves-light" type="submit" name={this.props.submitName} style={{fontWeight:600}}>{this.props.submitName}
+              </button>
             </form>
           </div>
         </div>
