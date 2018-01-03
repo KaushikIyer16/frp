@@ -13,7 +13,7 @@ export class Form extends React.Component {
     let form = this.state.formItems.map((items,index) => {
       return(<div class="row" key={index}>
               <div class="input-field col l12 m12 s12">
-                <input id={items.label} type={items.type} class="validate"/>
+                <input id={items.label} type={items.type} name={items.name} class="validate"/>
                 <label for={items.label}>{items.label}</label>
               </div>
             </div>);
@@ -23,7 +23,7 @@ export class Form extends React.Component {
         <div className="row">
           <h3>{this.props.heading}</h3>
           <div className="col l12 m12 s12">
-            <form action={this.props.action}>
+            <form action={this.props.action} method="post">
               {form}
               <button className="wbb-button btn waves-effect waves-light" type="submit" name={this.props.submitName} style={{fontWeight:600}}>{this.props.submitName}
               </button>

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {Link} from "react-router";
 
 export class Header extends React.Component{
 
@@ -12,7 +13,7 @@ export class Header extends React.Component{
 
   render(){
     let headerItems = this.state.headerLinks.map((links,index) => {
-      return(<li key={index}><a key={index} href={links.href}>{links.name}</a></li>);
+      return(<li key={index}><Link key={index} to={links.href}>{links.name}</Link></li>);
     });
     return(
       <div className="navbar-fixed">

@@ -1,3 +1,5 @@
+const PORT_NUMBER = 3000;
+
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -27,6 +29,7 @@ function getDbConnection() {
 }
 
 function closeDbConnection(client) {
+  console.log("DB Connection is closed");
   client.close();
 }
 
@@ -71,7 +74,8 @@ app.get("/fonts/:dir/:fileName", function(request,response) {
 
 app.post("/users/add", function(request, response) {
 
-  getDbConnection().then(function(db, client) {
+  getDbConnection()
+  .then(function(db, client) {
 
     let hash = crypto.createHash('sha256');
     let userName = request.body.userName;
@@ -85,23 +89,28 @@ app.post("/users/add", function(request, response) {
       }else{
         response.send(failure);
       }
-    }).catch(function(error) {
+
+    })
+    .catch(function(error) {
       console.log(error);
       response.send(failure);
     });
 
-    response.send(success);
+    return client;
 
-  }).catch(function(error) {
+  })
+  .catch(function(error) {
     console.log(error);
     response.send(failure);
-  });
+  })
+  .then(closeDbConnection);
 
 });
 
 app.post("/users/verify", function(request,response) {
 
-  getDbConnection().then(function(db, client) {
+  getDbConnection()
+  .then(function(db, client) {
 
     let hash = crypto.createHash('sha256');
     let userName = request.body.userName;
@@ -118,11 +127,44 @@ app.post("/users/verify", function(request,response) {
     });
 
 
-  }).catch(function(error) {
+  })
+  .catch(function(error) {
     console.log(error);
     response.send(failure)
-  });
+  })
+  .then(closeDbConnection);
 
 });
 
-app.listen(3000);
+/* Bottom are the requirement API's */
+
+app.post("/requirements/add",function(request, response) {
+
+  getDbConnection()
+  .then(function(db, client) {
+
+  })
+  .catch(function(error) {
+    console.log(error);
+  })
+  .then(closeDbConnection);
+
+});
+
+app.get("/requirements", function(request,response) {
+
+  getDbConnection()
+  .then(function(db, client) {
+    // db.collection('Requirement').insert();
+  })
+  .catch(function(error) {
+    console.log(error);
+  })
+  .then(closeDbConnection);
+
+});
+
+app.get("/requirements/qualification", function(request, response) {
+
+});
+app.listen(PORT_NUMBER);
