@@ -16,9 +16,11 @@ export class Dashboard extends React.Component{
 
     return(
       <div>
-        <Header links={[{"name":"Profile","href":"profile"},{"name":"Dashboard","href":"dashboard"}]} />
+        <Header links={[{"name":"Profile","href":"profile"},{"name":"akash","href":"dashboard"}]} />
         <h1>This is the dashboard</h1>
+        /*create the layout*/
 
+        
         {this.props.children}
       </div>
     );
